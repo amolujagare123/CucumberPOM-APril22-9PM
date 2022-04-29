@@ -2,10 +2,12 @@ package stepdefinitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+
 import org.junit.Assert;
 import pages.DarkskyHome;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static stepdefinitions.SharedSD.getDriver;
 
@@ -41,5 +43,45 @@ public class DarkskySD {
         System.out.println("actual="+actual);
         Assert.assertEquals("the temperatures are different",expected,actual);
 
+    }
+
+    @Then("I verify timeline is displayed with two hours incremented")
+    public void iVerifyTimelineIsDisplayedWithTwoHoursIncremented() {
+
+        ArrayList<Integer> timeList = darkskyHome.getTimeList(); // 11
+
+        ArrayList<Integer> timeDiffList = new ArrayList<>();
+
+        for (int i=0;i<timeList.size()-1;i++)
+        {
+            int time1 = timeList.get(i);
+            int time2 = timeList.get(i+1);
+            int timeDiff = 0;
+
+            if(time2>time1)
+                timeDiff = time2-time1;
+            if(time2<time1)
+                timeDiff = (time2+12)-time1;
+
+            timeDiffList.add(timeDiff);
+        }
+
+        System.out.println(timeDiffList);
+
+
+        /*
+        boolean flag = true;
+        for(int i=0;i<timeDiffList.size();i++)
+        {
+            if (timeDiffList.get(i)!=2)
+                flag = false;
+        }
+*/
+        int size = timeDiffList.size();
+        int occurance = Collections.frequency(timeDiffList,2);
+
+        boolean flag =  (size == occurance);
+
+        Assert.assertTrue("some differnces are not true",flag);
     }
 }

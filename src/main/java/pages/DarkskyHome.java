@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.By;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DarkskyHome extends Base {
@@ -14,6 +13,29 @@ public class DarkskyHome extends Base {
 
     By barLowTempText = By.xpath("//a[@data-day='0']//span[@class='minTemp']");
     By barHighTempText = By.xpath("//a[@data-day='0']//span[@class='maxTemp']");
+
+    By timeListRaw = By.xpath("//span[@class='hour']/span");
+
+    public ArrayList<Integer> getTimeList()
+    {
+        ArrayList<String> timelist = getElementTextList(timeListRaw);
+        System.out.println(timelist);
+
+        ArrayList<Integer> timelistInt = new ArrayList<>();
+
+        for (int i=0;i<timelist.size();i++)
+        {
+            String rawTime = timelist.get(i); // 11am , 1pm
+
+            int l = rawTime.length();
+            String timeStr = rawTime.substring(0, l - 2);
+            int time = Integer.parseInt(timeStr);
+            timelistInt.add(time);
+        }
+        System.out.println(timelistInt);
+
+        return timelistInt;
+    }
 
 
     public ArrayList<String> getCurrentTempList()
