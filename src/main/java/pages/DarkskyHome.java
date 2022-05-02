@@ -16,6 +16,14 @@ public class DarkskyHome extends Base {
 
     By timeListRaw = By.xpath("//span[@class='hour']/span");
 
+    By lnkDarkskyAPI = By.xpath("//a[normalize-space()='Dark Sky API']");
+
+    public void clickDarkskyAPI()
+    {
+        clickOn(lnkDarkskyAPI);
+    }
+
+
     public ArrayList<Integer> getTimeList()
     {
         ArrayList<String> timelist = getElementTextList(timeListRaw);

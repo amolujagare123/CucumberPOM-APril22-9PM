@@ -9,8 +9,8 @@ Feature: All bookings.com scenarios
     Examples:
       | stars   |
       | 5 stars |
-      | 4 stars |
-      | 3 stars |
+      #| 4 stars |
+    #  | 3 stars |
 
 
 #2
